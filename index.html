@@ -10,7 +10,6 @@
   <meta property="og:description" content="Explore Amber Roads' links and social profiles.">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="preconnect" href="https://media.link.me" crossorigin>
   <link rel="stylesheet" href="styles.css">
   <script defer src="config.js"></script>
   <script defer src="script.js"></script>
@@ -34,24 +33,11 @@
           <p class="description" id="profile-description" hidden></p>
           <nav class="socials" id="social-links" aria-label="Social media profiles"></nav>
         </header>
-        <section class="links" id="link-list" aria-label="Featured links"></section>
         <footer class="footer"><span>Made for the people who follow along.</span><span class="separator" aria-hidden="true">·</span><button type="button" id="footer-share">Share</button></footer>
       </div>
     </main>
   </div>
   <div class="notice" id="notice" aria-live="polite" role="status"></div>
-  <div class="modal" id="browser-modal" hidden>
-    <div class="modal-dim" data-close-modal></div>
-    <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-help">
-      <button type="button" class="close-button" id="close-modal" aria-label="Close dialog">×</button>
-      <span class="modal-symbol" aria-hidden="true">↗</span>
-      <h2 id="modal-title">Open in your browser</h2>
-      <p id="modal-help">For the best experience, continue in Safari or Chrome instead of the Instagram browser.</p>
-      <button class="primary-button" type="button" id="external-open">Open in browser <span aria-hidden="true">↗</span></button>
-      <a class="secondary-button" id="continue-here" href="#">Continue here</a>
-      <button class="copy-button" type="button" id="copy-destination">Copy link instead</button>
-    </section>
-  </div>
-  <noscript><p class="noscript">JavaScript is required to load the links. <a href="https://snipfeed.co/amberlinks">Exclusive Content</a></p></noscript>
+  <noscript><p class="noscript">JavaScript is required to display social links.</p></noscript>
 </body>
 </html>
