@@ -3,13 +3,13 @@ window.LINK_HUB_CONFIG = {
   name: 'Amber Roads',
   username: 'amberroads',
   description: '',
-  promptOnEntry: true,
   portrait: 'assets/amber-portrait.jpg',
   links: [
     {
       id: 'exclusive',
       title: '✨ Exclusive Content ✨',
       adult: true,
+      openExternally: true,
       url: 'https://onlyfans.com/amberroads',
       image: 'assets/featured.jpg',
       type: 'featured'
