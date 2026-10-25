@@ -51,11 +51,15 @@
     document.body.style.overflow = '';
     if (previousFocus && previousFocus.isConnected) previousFocus.focus();
   }
-  function showModal(url, fromEntry = false) {
+  function showModal(url, fromEntry = false, mature = false) {
     destination = safeURL(url);
     if (!destination) return;
     previousFocus = document.activeElement;
     entryPrompt = fromEntry;
+    $('modal-title').textContent = mature ? 'Mature content (18+)' : 'Open in your browser';
+    $('modal-help').textContent = mature ? 'This link may contain adult content. Continue only if you are 18 or older.' : 'For the best experience, continue in Safari or Chrome instead of the Instagram browser.';
+    $('external-open').textContent = mature ? 'Continue (18+) — Open in browser ↗' : 'Open in browser ↗';
+    $('continue-here').textContent = mature ? 'Continue here (18+)' : 'Continue here';
     $('continue-here').href=fromEntry?'#':destination;
     $('browser-modal').hidden=false;
     document.body.style.overflow='hidden';
@@ -77,18 +81,18 @@
     }
     if (inAppBrowser) notify('If nothing opens, tap Continue here or copy the link.');
   }
-  function followLink(ev, url) {
+  function followLink(ev, url, mature = false) {
     const normalized=safeURL(url);
     if (!normalized) {ev.preventDefault();return;}
-    if (!inAppBrowser) return;
+    if (!inAppBrowser && !mature) return;
     ev.preventDefault();
-    showModal(normalized);
+    showModal(normalized, false, mature);
   }
-  function makeAnchor(url, cls, text, title) {
+  function makeAnchor(url, cls, text, title, mature = false) {
     const a=document.createElement('a');
     a.className=cls;a.href=url;a.target='_blank';a.rel='noopener noreferrer';
     a.setAttribute('aria-label',title||text||'Open link');
-    a.addEventListener('click',e=>followLink(e,url));
+    a.addEventListener('click',e=>followLink(e,url,mature));
     return a;
   }
   for (const item of (config.social||[])) {
@@ -101,7 +105,7 @@
   for(const item of (config.links||[])) {
     const url=safeURL(item.url);if(!url)continue;
     const featured=item.type==='featured'&&safeAsset(item.image);
-    const link=makeAnchor(url,featured?'feature-link':'standard-link',item.title,item.title);
+    const link=makeAnchor(url,featured?'feature-link':'standard-link',item.title,item.title,!!item.adult);
     const title=document.createElement('span');title.className='link-title';title.textContent=item.title;
     if(featured) {
       const img=document.createElement('img');img.src=safeAsset(item.image);img.alt='';img.loading='lazy';
