@@ -38,7 +38,6 @@
   }
   let destination = null;
   let previousFocus = null;
-  let entryPrompt = false;
   let noticeTimer;
   function notify(msg) {
     $('notice').textContent=msg;
@@ -51,16 +50,15 @@
     document.body.style.overflow = '';
     if (previousFocus && previousFocus.isConnected) previousFocus.focus();
   }
-  function showModal(url, fromEntry = false, mature = false) {
+  function showModal(url, mature = false) {
     destination = safeURL(url);
     if (!destination) return;
     previousFocus = document.activeElement;
-    entryPrompt = fromEntry;
     $('modal-title').textContent = mature ? 'Mature content (18+)' : 'Open in your browser';
     $('modal-help').textContent = mature ? 'This link may contain adult content. Continue only if you are 18 or older.' : 'For the best experience, continue in Safari or Chrome instead of the Instagram browser.';
     $('external-open').textContent = mature ? 'Continue (18+) — Open in browser ↗' : 'Open in browser ↗';
     $('continue-here').textContent = mature ? 'Continue here (18+)' : 'Continue here';
-    $('continue-here').href=fromEntry?'#':destination;
+    $('continue-here').href=destination;
     $('browser-modal').hidden=false;
     document.body.style.overflow='hidden';
     $('external-open').focus();
@@ -81,18 +79,19 @@
     }
     if (inAppBrowser) notify('If nothing opens, tap Continue here or copy the link.');
   }
-  function followLink(ev, url, mature = false) {
+  function followLink(ev, url, mature = false, openExternally = false) {
     const normalized=safeURL(url);
     if (!normalized) {ev.preventDefault();return;}
-    if (!inAppBrowser && !mature) return;
+    // Only explicitly flagged links request an external browser; other links open normally.
+    if (!mature && !(inAppBrowser && openExternally)) return;
     ev.preventDefault();
-    showModal(normalized, false, mature);
+    showModal(normalized, mature);
   }
-  function makeAnchor(url, cls, text, title, mature = false) {
+  function makeAnchor(url, cls, text, title, mature = false, openExternally = false) {
     const a=document.createElement('a');
     a.className=cls;a.href=url;a.target='_blank';a.rel='noopener noreferrer';
     a.setAttribute('aria-label',title||text||'Open link');
-    a.addEventListener('click',e=>followLink(e,url,mature));
+    a.addEventListener('click',e=>followLink(e,url,mature,openExternally));
     return a;
   }
   for (const item of (config.social||[])) {
@@ -105,7 +104,7 @@
   for(const item of (config.links||[])) {
     const url=safeURL(item.url);if(!url)continue;
     const featured=item.type==='featured'&&safeAsset(item.image);
-    const link=makeAnchor(url,featured?'feature-link':'standard-link',item.title,item.title,!!item.adult);
+    const link=makeAnchor(url,featured?'feature-link':'standard-link',item.title,item.title,!!item.adult,!!item.openExternally);
     const title=document.createElement('span');title.className='link-title';title.textContent=item.title;
     if(featured) {
       const img=document.createElement('img');img.src=safeAsset(item.image);img.alt='';img.loading='lazy';
@@ -119,7 +118,7 @@
   }
   if (!(config.links||[]).some(item=>safeURL(item.url))) $('link-list').textContent='Links coming soon.';
   $('external-open').addEventListener('click',()=>externalOpen(destination));
-  $('continue-here').addEventListener('click',event=>{ if(entryPrompt) event.preventDefault(); closeModal(); });
+  $('continue-here').addEventListener('click',closeModal);
   $('close-modal').addEventListener('click',closeModal);
   document.querySelector('[data-close-modal]').addEventListener('click',closeModal);
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!$('browser-modal').hidden)closeModal()});
@@ -135,7 +134,4 @@
   }
   $('share-button').addEventListener('click',share);
   $('footer-share').addEventListener('click',share);
-  if (inAppBrowser && config.promptOnEntry && /^https?:$/.test(window.location.protocol)) {
-    setTimeout(() => { if ($('browser-modal').hidden) showModal(window.location.href, true); }, 450);
-  }
 })();
