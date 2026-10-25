@@ -9,7 +9,7 @@ window.LINK_HUB_CONFIG = {
     {
       id: 'exclusive',
       title: '✨ Exclusive Content ✨',
-      url: 'https://snipfeed.co/amberlinks',
+      url: 'https://onlyfans.com/amberroads',
       image: 'assets/featured.jpg',
       type: 'featured'
     }
