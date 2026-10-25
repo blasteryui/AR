@@ -9,6 +9,7 @@ window.LINK_HUB_CONFIG = {
     {
       id: 'exclusive',
       title: '✨ Exclusive Content ✨',
+      adult: true,
       url: 'https://onlyfans.com/amberroads',
       image: 'assets/featured.jpg',
       type: 'featured'
