@@ -1,21 +1,9 @@
-/** Edit these links when transferring the website to its future owner. */
+/** Amber Roads public social profile. The Nursejoyy test deployment is separate. */
 window.LINK_HUB_CONFIG = {
   name: 'Amber Roads',
   username: 'amberroads',
   description: '',
   portrait: 'assets/amber-portrait.jpg',
-  links: [
-    {
-      id: 'exclusive',
-      title: '✨ Exclusive Content ✨',
-      adult: true,
-      openExternally: true,
-      url: 'https://onlyfans.com/amberroads',
-      image: 'assets/featured.jpg',
-      type: 'featured'
-    }
-    // Add links here: ,{ id:'website', title:'Website', url:'https://example.com', type:'standard' }
-  ],
   social: [
     { label: 'Instagram', url: 'https://www.instagram.com/amberroads', icon: 'instagram' },
     { label: 'Facebook', url: 'https://www.facebook.com/amberroadss', icon: 'facebook' },
