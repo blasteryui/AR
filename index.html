@@ -5,39 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#101014">
   <meta name="color-scheme" content="dark">
-  <meta name="description" content="Amber Roads — links and social profiles.">
-  <meta property="og:title" content="Amber Roads | Links">
-  <meta property="og:description" content="Explore Amber Roads' links and social profiles.">
+  <meta name="description" content="Amber Roads">
+  <meta property="og:title" content="Amber Roads">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://amberroads.pages.dev/assets/amber-portrait.jpg">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="stylesheet" href="styles.css">
-  <script defer src="config.js"></script>
-  <script defer src="script.js"></script>
-  <title>Amber Roads | Links</title>
+  <title>Amber Roads</title>
 </head>
 <body>
-  <div class="page-backdrop" id="page-backdrop" aria-hidden="true"></div>
-  <div class="site-shell">
-    <main class="profile" id="profile">
-      <div class="hero" id="hero">
-        <img class="hero-image" id="hero-image" alt="Portrait of Amber Roads" loading="eager" fetchpriority="high">
-        <div class="hero-vignette" aria-hidden="true"></div>
-        <button class="share-button" id="share-button" aria-label="Share profile" type="button">
-          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.2M8.7 13.3l6.6 4.2"/></svg>
-        </button>
-      </div>
-      <div class="profile-content">
-        <header class="identity">
-          <h1 id="profile-name">Amber Roads</h1>
-          <p class="handle" id="profile-handle">@amberroads</p>
-          <p class="description" id="profile-description" hidden></p>
-          <nav class="socials" id="social-links" aria-label="Social media profiles"></nav>
-        </header>
-        <footer class="footer"><span>Made for the people who follow along.</span><span class="separator" aria-hidden="true">·</span><button type="button" id="footer-share">Share</button></footer>
-      </div>
-    </main>
-  </div>
-  <div class="notice" id="notice" aria-live="polite" role="status"></div>
-  <noscript><p class="noscript">JavaScript is required to display social links.</p></noscript>
+  <main class="banner" aria-label="Amber Roads banner">
+    <img src="assets/amber-portrait.jpg" alt="Amber Roads" fetchpriority="high" loading="eager">
+  </main>
 </body>
 </html>
